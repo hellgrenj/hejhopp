@@ -1,0 +1,7 @@
+apiVersion: skaffold/v2beta11
+kind: Config
+deploy:
+  kubeContext: docker-desktop
+  kubectl:
+    manifests:
+      - manifest.yaml

@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: appsettings
+data:
+  appsettings.k8s.json: |-
+   {
+      "Logging": {
+        "LogLevel": {
+          "Default": "Information",
+          "Microsoft.AspNetCore": "Warning"
+        }
+      },
+      "SndSettings": {
+        "ApiKey": "",
+        "BaseAddress": "REMOVED",
+        "AcceptHeaderContentType": "application/json"
+      },
+      "IdentityServer": {
+        "Authority": "REMOVED",
+        "Audience": "REMOVED",
+        "RequireHttpsMetadata ": false
+      }
+   }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: api
+  name: api
+spec:
+  ports:
+    - name: "api"
+      port: 5000
+      targetPort: 5000
+  type: LoadBalancer
+  selector:
+    app: api
+status:
+  loadBalancer: {}
+---
